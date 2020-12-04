@@ -35,13 +35,32 @@ public class TopPageIndexServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EntityManager em = DBUtil.createEntityManager();
 
+
+		int page = 1;
+        try{
+            page = Integer.parseInt(request.getParameter("page"));
+        } catch(NumberFormatException e) { }
+
+
+
 		List<Typing> scores = em.createNamedQuery("getAllTyping_score", Typing.class)
+		                        .setFirstResult(15 * (page - 1))
+		                        .setMaxResults(15)
 		                        .getResultList();
-		response.getWriter().append(Integer.valueOf(scores.size()).toString());
+
+		long score_count = (long)em.createNamedQuery("getScoreCount", Long.class)
+		                           .getSingleResult();
+
 
 		em.close();
 
-	    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
+		request.setAttribute("scores", scores);
+		request.setAttribute("score_count", score_count);
+		request.setAttribute("page", page);
+
+
+
+	    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/scores/index.jsp");
 		rd.forward(request, response);
 
 	}

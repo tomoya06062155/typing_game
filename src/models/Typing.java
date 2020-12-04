@@ -15,7 +15,11 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name = "getAllTyping_score",
-            query = "SELECT t FROM Typing AS t ORDER BY t.id DESC"
+            query = "SELECT t FROM Typing AS t ORDER BY t.time"
+            ),
+    @NamedQuery(
+            name = "getScoreCount",
+            query = "SELECT COUNT(e) FROM Typing AS e"
             )
 
 })
@@ -28,7 +32,7 @@ public class Typing {
     private Integer id;
 
     @Column(name = "time", nullable = false)
-    private Integer time;
+    private Double time;
 
     @Column(name = "time_date", nullable = false)
     private Date time_date;
@@ -42,10 +46,10 @@ public class Typing {
     }
 
 
-    public Integer getTime(){
+    public Double getTime(){
         return time;
     }
-    public void setTime(Integer time){
+    public void setTime(Double time){
         this.time = time;
     }
 
