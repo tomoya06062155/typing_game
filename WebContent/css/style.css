@@ -20,6 +20,7 @@ body {
 h1 {
     font-size: 24px;
     display: inline;
+    color: #eeeeee;
 }
 
 h2 {
@@ -153,3 +154,27 @@ pre {
     font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
 }
 
+body#typing_game{
+  font-family: 'Courier New', monospace;
+  text-align: center;
+}
+
+p#target{
+  font-size: 48px;
+  /* 下のコードは文字と文字の間隔を開けるもの */
+  letter-spacing: .1em;
+}
+
+#result{
+	text-align: center;
+}
+
+p.result2{
+	padding-top:40px;
+	padding-bottom:40px;
+	text-align: center;
+	font-size:30px;
+	background-color: pink;
+	border-radius: 50%;
+
+}
